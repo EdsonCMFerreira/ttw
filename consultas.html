@@ -7,6 +7,19 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="http://www.turnjs.com/lib/turn.min.js "></script>
 
+
+<style>
+    .alinhadoEsquerda {text-align:left;}
+    .alinhadoCentro {text-align:center;}
+    .alinhadoDireita {text-align:right;}
+    
+    .textoRealce-E {color:#2C55FF;}
+    .textoRealce-C {color:green;}
+    .textoRealce-D {color:red;}
+    
+    td {padding: 8px; border: 1px solid #E4E4E4;}
+    </style>
+
 <head>
     <title>Testes</title>
 
@@ -18,48 +31,54 @@
                     data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                    <img src="/TTW.jpg" />
+                    <!-- <img src="/TTW.jpg" />
                     <img src="localhost:8001/img/TTW.jpg" alt="" width="30"
-                        height="24" class="d-inline-block align-top">
-                    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30"
-                        height="24" class="d-inline-block align-top">
+                        height="24" class="d-inline-block align-top"> -->
+                    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" 
+                         alt="" 
+                         width="30" 
+                         height="24" 
+                         class="d-inline-block align-top">
                 </button>
             </div>
             <div>
-                <a class="navbar-brand" href="#">
-                    teste
-                </a>
+                <a class="navbar-brand" href="#">teste</a>
             </div>
-            <nav class="navbar navbar-light bg-light">
+            <nav class="navbar navbar-light bg-light"></nav>
+            <!-- <nav class="navbar navbar-light bg-light">
                 <form class="container-fluid justify-content-start">
                   <button class="btn btn-outline-success me-2" type="button">Main button</button>
                   <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
                 </form>
-              </nav>
-
+              </nav> -->
         </div>
-  
     </nav>
 </head>
 
- 
 <body onload="ConsultaProduto()">
     <section class="container">
-        <h5 class="card-title">Lista de Produtos</h5>
+    </br>
         <table class="table table-striped table-bordered table-sm">
             <thead class="thead-light" wid>
-                <tr class='row'>
+                <tr>
+                    <th class="col-xs-1 col-sm-1 col-md-1 col-lg-9"  scope="col" colspan="9">
+                        <center>
+                            <h5 class="card-title">Listagem de Produtos</h5>
+                        </center>
+                    </th>
+                </tr>
+                <tr>
                     <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">#</th>
                     <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">Código</th>
-                    <th class="col-xs-8 col-sm-8 col-md-8 col-lg-8" scope="col">Descrição</th>
+                    <th class="col-xs-8 col-sm-8 col-md-8 col-lg-5" scope="col">Descrição</th>
+                    <th class="alinhadoCentro" scope="col">Qtde em Estoque</th>
+                    <th class="alinhadoDireita" scope="col">Valor</th>
                 </tr>
             </thead>
             <tbody id='corpo'>
             </tbody>
-
         </table>
-
-        <nav aria-label="Page navigation example">
+        <!-- <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
               <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -71,7 +90,7 @@
                 <a class="page-link" href="#">Next</a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
     </section>
 </body>
 
@@ -80,17 +99,17 @@
 <script language="JavaScript">
 
     function ConsultaProduto() {
-
-        
         fetch('/produtos')
             .then(res => res.json())
             .then(json => {
                 var html = json.map(function (item, indice) {
-                    return `<tr  class='row'>
-                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">${indice + 1}</th>
-                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">${item.object_id}</th>
-                <td class="col-xs-8 col-sm-8 col-md-8 col-lg-8" scope="col">${item.name}</th>
-            </tr>`;
+                    return `<tr>
+                                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">${indice + 1}</th>
+                                <td class="col-xs-1 col-sm-1 col-md-1 col-lg-1" scope="col">${item.cd_produto}</th>
+                                <td class="col-xs-8 col-sm-8 col-md-8 col-lg-5" scope="col">${item.nm_produto}</th>
+                                <td class="alinhadoCentro scope="col">${item.qtd_estoque}</th>   
+                                <td class="alinhadoDireita" scope="col">${item.vl_precovenda.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</th>   
+                            </tr>`;
                 });
                 console.log(html);
                 window.document.getElementById("corpo").innerHTML = html.join("");

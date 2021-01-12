@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login Teste</title>
+    <style>
+        .login-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        .login-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+
+        .login-form input[type="password"],
+        .login-form input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #535b63;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #535b63;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        #main {
+            transition: margin-left .2s;
+            padding: 0px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 10px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+
+
+
+        /* CSS reset */
+        *,
+        *:before,
+        *:after {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* esconde as ancoras da tela */
+        a.links {
+            display: none;
+        }
+
+        /* content que contem os formulários */
+        .content {
+            width: 500px;
+            margin: 0px auto;
+            position: relative;
+        }
+
+        /* formatando o cabeçalho dos formulários */
+        h1 {
+            font-size: 48px;
+            color: #066a75;
+            padding: 10px 0;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        h1:after {
+            content: ' ';
+            display: block;
+            width: 100%;
+            height: 2px;
+            margin-top: 10px;
+            background: -webkit-linear-gradient(left, rgba(147, 184, 189, 0) 0%, rgba(147, 184, 189, 0.8) 20%, rgba(147, 184, 189, 1) 53%, rgba(147, 184, 189, 0.8) 79%, rgba(147, 184, 189, 0) 100%);
+            background: linear-gradient(left, rgba(147, 184, 189, 0) 0%, rgba(147, 184, 189, 0.8) 20%, rgba(147, 184, 189, 1) 53%, rgba(147, 184, 189, 0.8) 79%, rgba(147, 184, 189, 0) 100%);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        p:first-child {
+            margin: 0px;
+        }
+
+        label {
+            color: #405c60;
+            position: relative;
+        }
+
+        /**** advanced input styling ****/
+        /* placeholder */
+        ::-webkit-input-placeholder {
+            color: #bebcbc;
+            font-style: italic;
+        }
+
+        input:-moz-placeholder,
+        textarea:-moz-placeholder {
+            color: #bebcbc;
+            font-style: italic;
+        }
+
+        input {
+            outline: none;
+        }
+
+        input:not([type="checkbox"]) {
+            width: 95%;
+            margin-top: 4px;
+            padding: 10px;
+            border: 1px solid #b2b2b2;
+
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+
+            -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+            box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        /*estilo do botão submit */
+        input[type="submit"] {
+            width: 100% !important;
+            cursor: pointer;
+            background: #3d9db3;
+            padding: 8px 5px;
+            color: #fff;
+            font-size: 20px;
+            border: 1px solid #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 1px #333;
+
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+
+            transition: all 0.2s linear;
+        }
+
+        input[type="submit"]:hover {
+            background: #4ab3c6;
+        }
+
+        /*marcando os links para mudar de um formulário para outro */
+        .link {
+            position: absolute;
+            background: #e1eaeb;
+            color: #7f7c7c;
+            left: 0px;
+            height: 20px;
+            width: 440px;
+            padding: 17px 30px 20px 30px;
+            font-size: 16px;
+            text-align: right;
+            border-top: 1px solid #dbe5e8;
+
+            -webkit-border-radius: 0 0 5px 5px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .link a {
+            font-weight: bold;
+            background: #f7f8f1;
+            padding: 6px;
+            color: rgb(29, 162, 193);
+            margin-left: 10px;
+            border: 1px solid #cbd518;
+
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+
+            -webkit-transition: all 0.4s linear;
+            transition: all 0.4s linear;
+        }
+
+        .link a:hover {
+            color: #39bfd7;
+            background: #f7f7f7;
+            border: 1px solid #4ab3c6;
+        }
+
+        /* estilos para para ambos os formulários */
+        #cadastro,
+        #login {
+            position: absolute;
+            top: 0px;
+            width: 88%;
+            padding: 18px 6% 60px 6%;
+            margin: 0 0 35px 0;
+            background: rgb(247, 247, 247);
+            border: 1px solid rgba(147, 184, 189, 0.8);
+
+            /* -webkit-box-shadow: 5px; */
+            border-radius: 5px;
+
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-timing-function: ease;
+            -webkit-animation-fill-mode: both;
+
+            animation-duration: 0.5s;
+            animation-timing-function: ease;
+            animation-fill-mode: both;
+        }
+
+        #paracadastro:target~.content #cadastro,
+        #paralogin:target~.content #login {
+
+            z-index: 2;
+            -webkit-animation-name: fadeInLeft;
+            animation-name: fadeInLeft;
+
+            -webkit-animation-delay: .1s;
+            animation-delay: .1s; 
+            
+            
+        }
+
+        #registro:target~.content #login,
+        #paralogin:target~.content #cadastro {
+
+       
+            -webkit-animation-name: fadeOutLeft;
+            animation-name: fadeOutLeft;
+
+        }
+
+        /*fadeInLeft*/
+        @-webkit-keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateX(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /*fadeOutLeft*/
+        @-webkit-keyframes fadeOutLeft {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translateX(-20px);
+            }
+        }
+
+        @keyframes fadeOutLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- menu nav inicio -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">Sistema</a>
+        <a href="#">Serviços</a>
+        <a href="#">Clientes</a>
+
+        <a href="#">Quem Somos </a>
+        <a href="#">Contato</a>
+        <a href="#" onclick="Mudarestado('divid')">Login</a>
+    </div>
+
+
+    <button class="openbtn" onclick="openNav()">☰ Sistema de Consultas</button>
+    <h2>Consultas Inteligentes</h2>
+    <!-- <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p> -->
+    </div>
+    <!-- menu nav fim -->
+
+
+    <!-- login -->
+    <div class="login-form" id="divid" style="display:none">
+        <!--<h1>Login</h1>
+         <form method="POST" action="consulta" onsubmit="return check_senha()">
+            <input type="text" class="text required" required value="" placeholder="username" id="username">
+            <input type="password" class="text required" required value="" placeholder="password" id="password">
+
+            <input type="submit" class="btn btn-primary" id="btn_login" value="Enviar" />
+        </form> -->
+
+        <div class="container">
+
+            <a class="links" id="paracadastro"></a>
+            <a class="links" id="paralogin"></a>
+
+            <div class="content">
+                <!--FORMULÁRIO DE LOGIN-->
+                <div id="login">
+                    <form method="post" action="">
+                        <!-- <form method="POST" action="consulta" onsubmit="return check_senha()"> -->
+                        <h1>Login</h1>
+                        <p>
+                            <label for="email_login">Seu e-mail</label>
+                            <input id="email_login" name="email_login" required="required" type="text"
+                                placeholder="contato@htmlecsspro.com" />
+                        </p>
+
+                        <p>
+                            <label for="senha_login">Sua senha</label>
+                            <input id="senha_login" name="senha_login" required="required" type="password"
+                                placeholder="1234" />
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="manterlogado" id="manterlogado" value="" />
+                            <label for="manterlogado">Manter-me logado</label>
+                        </p>
+
+                        <p>
+                            <input type="submit" value="Logar" />
+                        </p>
+
+                        <p class="link">
+                            Ainda não tem conta?
+                            <a href="#paracadastro">Cadastre-se</a>
+                        </p>
+                    </form>
+                </div>
+
+                <!--FORMULÁRIO DE CADASTRO-->
+                <div id="cadastro">
+                    <form method="post" action="">
+                        <h1>Cadastro</h1>
+
+                        <p>
+                            <label for="nome_cad">Seu nome</label>
+                            <input id="nome_cad" name="nome_cad" required="required" type="text"
+                                placeholder="Luiz Augusto" />
+                        </p>
+
+                        <p>
+                            <label for="email_cad">Seu e-mail</label>
+                            <input id="email_cad" name="email_cad" required="required" type="email"
+                                placeholder="contato@htmlecsspro.com" />
+                        </p>
+
+                        <p>
+                            <label for="senha_cad">Sua senha</label>
+                            <input id="senha_cad" name="senha_cad" required="required" type="password"
+                                placeholder="1234" />
+                        </p>
+
+                        <p>
+                            <input type="submit" value="Cadastrar" />
+                        </p>
+
+                        <p class="link">
+                            Já tem conta?
+                            <a href="#paralogin"> Ir para Login </a>
+                        </p>
+                    </form>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+    <!-- login fim -->
+
+</body>
+
+</html>
+
+<script language="JavaScript">
+    // $('#pesquisar').click(function () {
+    //     $('.corpoTbl').remove();
+    //     $.ajax({
+    //         url: "/RCM/ListarMateriais",
+    //         type: "POST",
+    //         data: { nome: $('#NomeMaterial').val() },
+    //         datatype: 'json',
+    //         success: function (data) {
+    //             $.each(data, function (I, item) {
+    //                 $('#tbl').append("<tr class=\"corpoTbl\"> <td class=\"id\">" + item.ID + "</td><td>" + item.Nome + "</td><td>" + item.TD + "</td><td>" + item.Unidade +
+    //                     "</td><td> <input class=\"qtda\" type=\"text\" value=\"0\" style=\"width: 50px;\" /> </td><td> <input class=\"btn\" type=\"button\" value=\"Adicionar\" /> </td></tr>")
+    //             })
+    //         }
+    //     });
+    // });
+    function check_senha() {
+        var inputs = document.getElementsByClassName('required');
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        var len = inputs.length;
+        var valid = true;
+        for (var i = 0; i < len; i++) {
+            if (!inputs[i].value) { valid = false; }
+        }
+        //chamar aqui a api validalogin
+
+        return true;
+        // }
+    }
+
+    function login() {
+        var xhttp = new XMLHttpRequest();
+        //se o servidor respondeu 200 (sucesso) 
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert('Formulario enviado com sucesso');
+            }
+        };
+    }
+
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "14%";
+        document.getElementById("main").style.marginLeft = "14%";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+    function Mudarestado(el) {
+        var div = document.getElementById(el);
+        var disp = div.style.display;
+        div.style.display = disp == 'none' ? 'block' : 'none';
+    }
+
+</script>

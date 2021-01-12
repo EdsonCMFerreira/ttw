@@ -4,7 +4,8 @@
   "description": "Sistema para acesso ao EcoData",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
+
   },
   "author": "Edson C. M. Ferreira",
   "license": "ISC",
