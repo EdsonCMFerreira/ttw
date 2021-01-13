@@ -11,7 +11,7 @@ const options = {
     info: {
       title: 'Sistema API',
       version: '1.0.0',
-      description: 'Teste de auto documentação de API com Swagger'
+      description: 'Sistema de Consultas com documentação de API com Swagger'
     },
     host: "localhost:3000",
     basePath: "/",
@@ -34,10 +34,19 @@ var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+ 
 app.use('/produtos', produtosRouter);
 app.use('/clientes', clientesRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs, cssOptions));
+
+
+
+
+app.get('/product', (req, res) => {
+    res.sendFile(__dirname + "/views/consultas.html")
+  
+})
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/views/index.html")
