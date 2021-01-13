@@ -2,15 +2,17 @@
   "name": "ed",
   "version": "1.0.0",
   "description": "Sistema para acesso ao EcoData",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon app.js"
   },
   "author": "Edson C. M. Ferreira",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mssql": "^6.2.3"
+    "mssql": "^6.2.3",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {}
 }

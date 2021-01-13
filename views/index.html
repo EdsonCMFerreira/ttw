@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login Teste</title>
+    <style>
+        .login-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        .login-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+
+        .login-form input[type="password"],
+        .login-form input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #535b63;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #535b63;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        #main {
+            transition: margin-left .2s;
+            padding: 0px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 10px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- menu nav inicio -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">Sistema</a>
+        <a href="#">Serviços</a>
+        <a href="#">Clientes</a>
+        
+        <a href="#">Quem Somos </a>
+        <a href="#">Contato</a>
+        <a href="#" onclick="Mudarestado('divid')">Login</a>
+        <a href="#" onclick="window.location.href = 'http://localhost:3000/consultas'">link</a>
+ 
+    </div>
+    
+
+        <button class="openbtn" onclick="openNav()">☰ Sistema de Consultas</button>
+        <h2>Consultas Inteligentes</h2>
+        <!-- <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p> -->
+    </div>
+    <!-- menu nav fim -->
+
+
+    <!-- login -->
+    <div class="login-form" id="divid" style="display:none">
+        <h1>Login</h1>
+        <form method="GET" action="consulta" onsubmit="return check_senha()">
+            <input type="text" class="text required" required value="" placeholder="username" id="username">
+            <input type="password" class="text required" required value="" placeholder="password" id="password">
+
+            <input type="submit" class="btn btn-primary" id="btn_login" value="Enviar" />
+        </form>
+    </div>
+    <!-- login fim -->
+
+</body>
+
+</html>
+
+<script language="JavaScript">
+    // $('#pesquisar').click(function () {
+    //     $('.corpoTbl').remove();
+    //     $.ajax({
+    //         url: "/RCM/ListarMateriais",
+    //         type: "POST",
+    //         data: { nome: $('#NomeMaterial').val() },
+    //         datatype: 'json',
+    //         success: function (data) {
+    //             $.each(data, function (I, item) {
+    //                 $('#tbl').append("<tr class=\"corpoTbl\"> <td class=\"id\">" + item.ID + "</td><td>" + item.Nome + "</td><td>" + item.TD + "</td><td>" + item.Unidade +
+    //                     "</td><td> <input class=\"qtda\" type=\"text\" value=\"0\" style=\"width: 50px;\" /> </td><td> <input class=\"btn\" type=\"button\" value=\"Adicionar\" /> </td></tr>")
+    //             })
+    //         }
+    //     });
+    // });
+    function check_senha() {
+        var inputs = document.getElementsByClassName('required');
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        var len = inputs.length;
+        var valid = true;
+        for (var i = 0; i < len; i++) {
+            if (!inputs[i].value) { valid = false; }
+        }
+        //chamar aqui a api validalogin
+
+        return true;
+        // }
+    }
+
+    function login() {
+        var xhttp = new XMLHttpRequest();
+        //se o servidor respondeu 200 (sucesso) 
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert('Formulario enviado com sucesso');
+            }
+        };
+    }
+
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "14%";
+        document.getElementById("main").style.marginLeft = "14%";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+    function Mudarestado(el) {
+        var div = document.getElementById(el);
+        var disp = div.style.display;
+        div.style.display = disp == 'none' ? 'block' : 'none';
+    }
+
+</script>
