@@ -5,13 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
-
   },
   "author": "Edson C. M. Ferreira",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "mssql": "^6.2.3"
   },

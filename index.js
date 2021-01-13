@@ -52,13 +52,13 @@ function execSQLQuery(sqlQry, res){
 }
 
 
-app.get('/ariel', (req, res) => {
-    res.send('Hello World!')
-})
+// app.get('/ariel', (req, res) => {
+//     res.send('Hello World!')
+// })
 
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`http://localhost:${port}`)
 })
 
 
